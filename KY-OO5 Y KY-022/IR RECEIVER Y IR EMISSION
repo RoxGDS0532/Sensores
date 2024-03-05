@@ -7,7 +7,7 @@ emisor_ir_pin = Pin(19, Pin.OUT)  # Pin para el emisor IR
 receptor_ir_pin = Pin(18, Pin.IN)  # Pin para el receptor IR
 led_pin = Pin(17, Pin.OUT)  # Pin para el LED
 
-# Configura el objeto para la pantalla OLED (Ajusta estos pines y dirección I2C según tu hardware)
+# Configura el objeto para la pantalla OLED
 i2c = I2C(-1, scl=Pin(22), sda=Pin(21))
 oled = SSD1306_I2C(128, 64, i2c)
 
@@ -38,11 +38,8 @@ while True:
         oled.fill(0)
         oled.text("Se recibio la señal", 0, 0)
         oled.show()
-        # Enciende el LED
         led_pin.on()
-        # Espera un momento
         sleep(0.5)
-        # Apaga el LED
         led_pin.off()
     
     # Imprime el estado del receptor IR
