@@ -1,0 +1,22 @@
+from hcsr04 import HCSR04
+from machine import I2C, Pin
+from ssd1306 import SSD1306_I2C
+from time import sleep
+
+sensor = HCSR04(trigger_pin=5, echo_pin=18, echo_timeout_us=24000)
+
+i2c = I2C(-1, scl=Pin(22), sda=Pin(21))
+oled = SSD1306_I2C(128, 64, i2c)
+
+# Ciclo infinito
+while True:
+    # Obtiene la distancia
+    distancia = sensor.distance_cm()
+    oled.fill(0)
+    oled.text("Distancia:", 0, 0)
+    oled.text(str(distancia) + " cm", 0, 20)
+
+    oled.show()
+    sleep(1)
+
+
